@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="product.info.addtocart.additional">
+            <block class="Magento\Framework\View\Element\Template" name="credova.qualification-button" after="-"
+                   ifconfig="payment/credova/active">
+                <arguments>
+                    <argument name="template" xsi:type="string">ClassyLlama_Credova::qualification-button.phtml</argument>
+                    <argument name="view_model" xsi:type="object">ClassyLlama\Credova\ViewModel\Qualification</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+
+        <referenceContainer name="before.body.end">
+            <block class="Magento\Catalog\Block\Product\View" name="credova.qualification-button-js"
+                   ifconfig="payment/credova/active">
+                <arguments>
+                    <argument name="template" xsi:type="string">ClassyLlama_Credova::qualification-button-js.phtml</argument>
+                    <argument name="view_model" xsi:type="object">ClassyLlama\Credova\ViewModel\Qualification</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

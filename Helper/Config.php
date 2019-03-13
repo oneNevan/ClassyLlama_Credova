@@ -10,9 +10,11 @@ class Config extends \Magento\Framework\App\Helper\AbstractHelper
     const CREDOVA_API_USERNAME_CONFIG_PATH = 'payment/credova/api_username';
     const CREDOVA_API_PASSWORD_CONFIG_PATH = 'payment/credova/api_password';
     const CREDOVA_STORE_CODE_CONFIG_PATH = 'payment/credova/store_code';
+    const CREDOVA_ENVIRONMENT_CONFIG_PATH = 'payment/credova/environment';
     const CREDOVA_MINIMUM_AMOUNT_CONFIG_PATH = 'payment/credova/minimum_amount';
     const CREDOVA_ALLOW_SPECIFIC_COUNTRIES_CONFIG_PATH = 'payment/credova/allowspecific';
     const CREDOVA_SPECIFIC_COUNTRY_CONFIG_PATH = 'payment/credova/specificcountry';
+    const CREDOVA_QUALIFICATION_BUTTON_MESSAGE_CONFIG_PATH = 'payment/credova/qualification_button_message';
     const CREDOVA_LOGGING_ENABLED_CONFIG_PATH = 'payment/credova/logging_enabled';
     const CREDOVA_SORT_ORDER_CONFIG_PATH = 'payment/credova/sort_order';
 
@@ -101,6 +103,20 @@ class Config extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
+     * Get credova payment method environment
+     *
+     * @param string $scopeType
+     * @param null $scopeCode
+     * @return string
+     */
+    public function getCredovaEnvironment(
+        $scopeType = \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+        $scopeCode = null
+    ) : string {
+        return (string)$this->scopeConfig->getValue(self::CREDOVA_ENVIRONMENT_CONFIG_PATH, $scopeType, $scopeCode);
+    }
+
+    /**
      * Get credova payment method minimum order amount
      *
      * @param string $scopeType
@@ -143,6 +159,20 @@ class Config extends \Magento\Framework\App\Helper\AbstractHelper
             ',',
             $this->scopeConfig->getValue(self::CREDOVA_SPECIFIC_COUNTRY_CONFIG_PATH, $scopeType, $scopeCode)
         );
+    }
+
+    /**
+     * Get credova payment method qualification button message
+     *
+     * @param string $scopeType
+     * @param null $scopeCode
+     * @return string
+     */
+    public function getCredovaQualificationButtonMessage(
+        $scopeType = \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+        $scopeCode = null
+    ) : string {
+        return (string)$this->scopeConfig->getValue(self::CREDOVA_QUALIFICATION_BUTTON_MESSAGE_CONFIG_PATH, $scopeType, $scopeCode);
     }
 
     /**

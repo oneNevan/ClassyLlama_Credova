@@ -1,0 +1,30 @@
+<?php
+    /** @var $block \Magento\Catalog\Block\Product\View */
+
+    /** @var \ClassyLlama\Credova\ViewModel\Qualification $viewModel */
+    $viewModel = $block->getViewModel();
+?>
+
+<?php
+    // NB: the plugin JS fails with `document.body is null` errors if included in the head.
+    // As such, it's being included at the end of the body.
+?>
+<script src="https://plugin.credova.com/plugin.min.js"></script>
+<script>
+    CRDV.plugin.config({
+        environment: <?= $block->escapeJs($viewModel->getEnvironmentConstant()) ?>,
+        store: "<?= $block->escapeJs($viewModel->getConfigHelper()->getCredovaStoreCode()) ?>"
+    });
+
+    document.getElementById('credova-qualification-button').addEventListener('click', function(e) {
+        e.preventDefault();
+
+        CRDV.plugin.prequalify(1245.67).then(function(res) { // @todo: amount
+            if (res.approved) {
+                alert("User was approved and publicId is " + res.publicId);
+            } else {
+                alert("User was not approved");
+            }
+        });
+    });
+</script>

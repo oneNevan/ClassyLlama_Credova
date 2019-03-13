@@ -1,0 +1,11 @@
+<?php
+    /** @var $block \Magento\Framework\View\Element\Template */
+
+    /** @var \ClassyLlama\Credova\ViewModel\Qualification $viewModel */
+    $viewModel = $block->getViewModel();
+?>
+<div class="credova-qualification-button-wrapper" data-label="<?= __('or') ?>">
+    <button id="credova-qualification-button" class="action primary tocart">
+        <?= $block->escapeHtml($viewModel->getConfigHelper()->getCredovaQualificationButtonMessage()) ?>
+    </button>
+</div>
