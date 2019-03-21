@@ -5,7 +5,7 @@
     $viewModel = $block->getViewModel();
 ?>
 <div class="credova-qualification-button-wrapper" data-label="<?= __('or') ?>">
-    <button id="credova-qualification-button" class="action primary tocart">
+    <button id="credova-qualification-button" class="action primary tocart" name="credova-qualification" type="button">
         <?= $block->escapeHtml($viewModel->getConfigHelper()->getCredovaQualificationButtonMessage()) ?>
     </button>
 </div>

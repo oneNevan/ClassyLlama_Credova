@@ -15,16 +15,13 @@
         environment: <?= $block->escapeJs($viewModel->getEnvironmentConstant()) ?>,
         store: "<?= $block->escapeJs($viewModel->getConfigHelper()->getCredovaStoreCode()) ?>"
     });
-
-    document.getElementById('credova-qualification-button').addEventListener('click', function(e) {
-        e.preventDefault();
-
-        CRDV.plugin.prequalify(1245.67).then(function(res) { // @todo: amount
-            if (res.approved) {
-                alert("User was approved and publicId is " + res.publicId);
-            } else {
-                alert("User was not approved");
-            }
-        });
-    });
+</script>
+<script type="text/x-magento-init">
+{
+    "#credova-qualification-button": {
+        "credovaQualificationPopup": {
+            "minimumAmount": "<?= $block->escapeJs($viewModel->getConfigHelper()->getCredovaMinimumAmount()) ?>"
+        }
+    }
+}
 </script>

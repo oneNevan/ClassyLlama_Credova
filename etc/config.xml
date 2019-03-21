@@ -6,6 +6,10 @@
                 <active>0</active>
                 <title>Credova</title>
                 <environment>stage</environment>
+                <!--
+                    Credova appears to reject any amounts less than 300 automatically.
+                -->
+                <minimum_amount>300</minimum_amount>
                 <qualification_button_message>Buy With Financing</qualification_button_message>
                 <logging_enabled>0</logging_enabled>
             </credova>

@@ -13,6 +13,7 @@
                 </field>
 
                 <field id="api_url" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <!-- @deprecated -->
                     <label>API URL</label>
                 </field>
                 <field id="api_username" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -29,8 +30,13 @@
                     <source_model>ClassyLlama\Credova\Model\Config\Source\Environment</source_model>
                 </field>
 
-                <field id="minimum_amount" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="minimum_amount" translate="label comment" type="text" sortOrder="80" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Minimum Amount that can be financed</label>
+                    <comment>
+                        Amounts less than this will not be eligible to use Credova.
+                        Must be at least 300.
+                    </comment>
                     <frontend_class>validate-number</frontend_class>
                 </field>
                 <field id="allowspecific" translate="label" type="allowspecific" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
