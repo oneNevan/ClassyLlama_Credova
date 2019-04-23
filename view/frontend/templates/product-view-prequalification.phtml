@@ -1,0 +1,19 @@
+<?php
+/** @var \ClassyLlama\Credova\Helper\Config $configHelper */
+$configHelper = $this->helper(\ClassyLlama\Credova\Helper\Config::class);
+/** @var \ClassyLlama\Credova\Block\Product\Prequalification $viewModel */
+$viewModel = $this->getData('viewModel');
+?>
+
+<p class="credova-button" data-amount="<?= $viewModel->getProductFinalPrice() ?>" data-type="popup"></p>
+<script>
+    (function() {
+        window.addEventListener('load', function () {
+            CRDV.plugin.config({
+                environment: CRDV.Environment.<?= $configHelper->getCredovaEnvironment() ?>,
+                store: "<?= $configHelper->getCredovaStoreCode() ?>"
+            });
+            CRDV.plugin.inject('credova-button');
+        });
+    })();
+</script>
