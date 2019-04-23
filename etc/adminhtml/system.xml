@@ -20,6 +20,10 @@
                 <field id="api_password" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>API Password</label>
                 </field>
+                <field id="environment" translate="label" type="select" sortOrder="55" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Environment</label>
+                    <source_model>\ClassyLlama\Credova\Model\Config\Source\Environment</source_model>
+                </field>
                 <field id="store_code" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Store Code</label>
                 </field>
