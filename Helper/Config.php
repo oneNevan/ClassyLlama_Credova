@@ -15,6 +15,7 @@ class Config extends \Magento\Framework\App\Helper\AbstractHelper
     const CREDOVA_SPECIFIC_COUNTRY_CONFIG_PATH = 'payment/credova/specificcountry';
     const CREDOVA_LOGGING_ENABLED_CONFIG_PATH = 'payment/credova/logging_enabled';
     const CREDOVA_SORT_ORDER_CONFIG_PATH = 'payment/credova/sort_order';
+    const CREDOVA_ENVIRONMENT_CONFIG_PATH = 'payment/credova/environment';
 
     /**
      * Get credova payment method active
@@ -171,5 +172,21 @@ class Config extends \Magento\Framework\App\Helper\AbstractHelper
         $scopeCode = null
     ) : int {
         return (int)$this->scopeConfig->getValue(self::CREDOVA_SORT_ORDER_CONFIG_PATH, $scopeType, $scopeCode);
+    }
+
+
+
+    /**
+     * Get credova payment method sort order
+     *
+     * @param string $scopeType
+     * @param null $scopeCode
+     * @return string
+     */
+    public function getCredovaEnvironment(
+        $scopeType = \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+        $scopeCode = null
+    ) : string {
+        return $this->scopeConfig->getValue(self::CREDOVA_ENVIRONMENT_CONFIG_PATH, $scopeType, $scopeCode);
     }
 }
