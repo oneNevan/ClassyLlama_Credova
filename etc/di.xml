@@ -27,4 +27,15 @@
             <argument name="logger" xsi:type="object">ClassyLlama\Credova\Logger\Credova</argument>
         </arguments>
     </type>
+
+    <type name="Magento\Checkout\Model\CompositeConfigProvider">
+        <arguments>
+            <argument name="configProviders" xsi:type="array">
+                <item name="credova" xsi:type="object">ClassyLlama\Credova\Model\CredovaPaymentConfigProvider</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <preference for="ClassyLlama\Credova\Api\Data\ApplicationInfoInterface" type="ClassyLlama\Credova\Model\Data\Application" />
+    <preference for="ClassyLlama\Credova\Api\ApplicationInterface" type="ClassyLlama\Credova\Model\Api\Application" />
 </config>
