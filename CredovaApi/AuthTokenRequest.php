@@ -77,7 +77,7 @@ class AuthTokenRequest extends \ClassyLlama\Credova\CredovaApi\RequestAbstract
         // Set the cache expiration to the exp timestamp in the token, minus 5 minutes to ensure we don't have rejected token errors
         $expirationInSeconds = json_decode(base64_decode($data[self::TOKEN_KEY]), true)['exp'] - time() - (5 * 60);
 
-        $this->cache->save($data[self::TOKEN_KEY], self::CACHE_KEY, null, $expirationInSeconds);
+        $this->cache->save($data[self::TOKEN_KEY], self::CACHE_KEY, [], $expirationInSeconds);
 
         return $data[self::TOKEN_KEY];
     }
