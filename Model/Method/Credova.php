@@ -8,11 +8,13 @@
 namespace ClassyLlama\Credova\Model\Method;
 
 use Magento\Directory\Helper\Data as DirectoryHelper;
+use Magento\Framework\DataObject;
 use Magento\Payment\Model\InfoInterface;
-use \Magento\Framework\DataObject;
 
 class Credova extends \Magento\Payment\Model\Method\AbstractMethod
 {
+    const ADDITIONAL_INFO_APPLICATION_ID_KEY = 'credova_application_id';
+
     /**
      * Payment method code
      *
@@ -40,8 +42,7 @@ class Credova extends \Magento\Payment\Model\Method\AbstractMethod
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = [],
         DirectoryHelper $directory = null
-    )
-    {
+    ) {
         parent::__construct($context, $registry, $extensionFactory, $customAttributeFactory, $paymentData, $scopeConfig, $logger, $resource, $resourceCollection, $data, $directory);
         $this->orderExtensionInterfaceFactory = $orderExtensionInterfaceFactory;
     }
@@ -61,13 +62,18 @@ class Credova extends \Magento\Payment\Model\Method\AbstractMethod
 
         $orderExtensionAttributes = $order->getExtensionAttributes();
 
-        if($orderExtensionAttributes === null) {
+        if ($orderExtensionAttributes === null) {
             $orderExtensionAttributes = $this->extensionAttributesFactory->create();
         }
 
-        $orderExtensionAttributes->setCredovaApplicationId($this->applicationId);
-        $order->setExtensionAttributes($orderExtensionAttributes);
-        $payment->setOrder($order);
+        $applicationId =
+            $this->getInfoInstance()->getAdditionalInformation(self::ADDITIONAL_INFO_APPLICATION_ID_KEY);
+
+        if ($applicationId !== null) {
+            $orderExtensionAttributes->setCredovaApplicationId($applicationId);
+            $order->setExtensionAttributes($orderExtensionAttributes);
+            $payment->setOrder($order);
+        }
 
         parent::capture($payment, $amount);
     }
@@ -76,11 +82,14 @@ class Credova extends \Magento\Payment\Model\Method\AbstractMethod
     {
         parent::assignData($data);
 
-        $this->applicationId = $data->getData('additional_data')['application_id'];
+        // TODO: look before you leap
+        $applicationId = $data->getData('additional_data')['application_id'];
+
+        // Set application ID on info instance to persist for later use
+        $this->getInfoInstance()->setAdditionalInformation(self::ADDITIONAL_INFO_APPLICATION_ID_KEY, $applicationId);
 
         return $this;
     }
-
 
     public function canCapture()
     {
