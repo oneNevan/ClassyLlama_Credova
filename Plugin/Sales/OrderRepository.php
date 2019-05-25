@@ -76,11 +76,18 @@ class OrderRepository
      * @param \Magento\Sales\Api\OrderRepositoryInterface $subject
      * @param \Magento\Sales\Api\Data\OrderInterface $order
      * @return \Magento\Sales\Api\Data\OrderInterface
+     * @throws LocalizedException
      */
     public function afterGet(
         \Magento\Sales\Api\OrderRepositoryInterface $subject,
         \Magento\Sales\Api\Data\OrderInterface $order
     ) {
+        if (!($order instanceof \Magento\Sales\Model\Order)) {
+            throw new LocalizedException(
+                __('Credova extension attribute persistence requires native order data model implementation.')
+            );
+        }
+
         $this->attachCredovaExtensionAttributes([$order]);
 
         return $order;
