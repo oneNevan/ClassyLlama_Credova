@@ -8,7 +8,7 @@ interface ApplicationInterface
     /**
      * Creates an application in Credova and returns the public id
      *
-     * @param Data\ApplicationInfoInterface $applicationInfo
+     * @param \ClassyLlama\Credova\Api\Data\ApplicationInfoInterface $applicationInfo
      * @return string
      * @throws \Magento\Framework\Exception\LocalizedException
      */

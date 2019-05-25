@@ -1,6 +1,6 @@
 {
   "name": "classyllama/module-credova",
-  "description": "Adds a payment method utilzing Credova's financing services",
+  "description": "Adds a payment method utilizing Credova's financing services",
   "type": "magento2-module",
   "version": "1.0.0",
   "autoload": {

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace ClassyLlama\Credova\Model\Api;
-
 
 use ClassyLlama\Credova\Api\ApplicationInterface;
 use ClassyLlama\Credova\Api\Data;
@@ -10,6 +8,10 @@ use ClassyLlama\Credova\Helper\Config;
 
 class Application implements ApplicationInterface
 {
+    /**
+     * @var \Magento\Framework\UrlInterface
+     */
+    protected $urlBuilder;
 
     /**
      * @var \ClassyLlama\Credova\CredovaApi\Authenticated\ApplicationFactory
@@ -24,11 +26,16 @@ class Application implements ApplicationInterface
      */
     private $checkoutSession;
 
-    public function __construct(\ClassyLlama\Credova\CredovaApi\Authenticated\ApplicationFactory $applicationRequestFactory, Config $configHelper, \Magento\Checkout\Model\Session $checkoutSession)
-    {
+    public function __construct(
+        \ClassyLlama\Credova\CredovaApi\Authenticated\ApplicationFactory $applicationRequestFactory,
+        Config $configHelper,
+        \Magento\Checkout\Model\Session $checkoutSession,
+        \Magento\Framework\UrlInterface $urlBuilder
+    ) {
         $this->applicationRequestFactory = $applicationRequestFactory;
         $this->configHelper = $configHelper;
         $this->checkoutSession = $checkoutSession;
+        $this->urlBuilder = $urlBuilder;
     }
 
     /**
@@ -48,7 +55,7 @@ class Application implements ApplicationInterface
 
         $data = [
             'storeCode' => $this->configHelper->getCredovaStoreCode(),
-            'redirectUrl' => 'https://credova.test/checkout/credovaCapture',
+            'redirectUrl' => $this->urlBuilder->getRouteUrl('checkout/credovaCapture'),
             'firstName' => $applicationInfo->getFirstName(),
             'lastName' => $applicationInfo->getLastName(),
             'email' => $applicationInfo->getEmail(),
@@ -75,7 +82,7 @@ class Application implements ApplicationInterface
         $request = $this->applicationRequestFactory->create(['applicationInfo' => $data]);
         $response = $request->getResponseData();
 
-        if(!array_key_exists('publicId', $response)) {
+        if (!array_key_exists('publicId', $response)) {
             // TODO: Properly handle API errors
             throw new \Exception($response);
         }
