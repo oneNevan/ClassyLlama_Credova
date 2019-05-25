@@ -31,4 +31,8 @@
 
     <preference for="ClassyLlama\Credova\Api\Data\ApplicationInfoInterface" type="ClassyLlama\Credova\Model\Data\Application" />
     <preference for="ClassyLlama\Credova\Api\ApplicationInterface" type="ClassyLlama\Credova\Model\Api\Application" />
+
+    <type name="Magento\Sales\Api\OrderRepositoryInterface">
+        <plugin name="persist_credova_extension_attributes" type="ClassyLlama\Credova\Plugin\Sales\OrderRepository"/>
+    </type>
 </config>
