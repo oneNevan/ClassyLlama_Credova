@@ -138,7 +138,11 @@ abstract class RequestAbstract
         $client->setHeaders($this->getHeaders());
 
         if (!empty($this->getData())) {
-            $client->setRawBody(json_encode($this->getData()));
+            $requestBody = json_encode($this->getData());
+
+            $this->debugLog($requestBody);
+
+            $client->setRawBody($requestBody);
         }
 
         $this->prepareRequest($client);
