@@ -1,6 +1,6 @@
 {
   "name": "classyllama/module-credova",
-  "description": "Adds a payment method utilzing Credova's financing services",
+  "description": "Adds a payment method utilizing Credova's financing services",
   "type": "magento2-module",
   "version": "1.0.0",
   "autoload": {
@@ -8,5 +8,12 @@
     "psr-4": {
       "ClassyLlama\\Credova\\": ""
     }
+  },
+  "require": {
+    "magento/module-payment": "100.3.*",
+    "magento/module-checkout": "100.3.*",
+    "magento/module-sales": "102.*.*",
+    "giggsey/libphonenumber-for-php": "8.10.12",
+    "ext-json": "*"
   }
 }
