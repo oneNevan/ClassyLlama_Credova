@@ -1,113 +1,215 @@
 <?php
 
-
 namespace ClassyLlama\Credova\Model\Data;
 
-
-use ClassyLlama\Credova\Api\Data\ApplicationInfoInterface;
-
-class Application extends \Magento\Framework\Api\AbstractExtensibleObject implements ApplicationInfoInterface
+class Application extends \Magento\Framework\Api\AbstractSimpleObject implements \ClassyLlama\Credova\Api\Data\ApplicationInterface
 {
 
     /**
-     * @return string|null
+     * {@inheritdoc}
      */
     public function getPublicId()
     {
-        return $this->_get(self::PUBLIC_ID);
+        return (string)$this->_get(self::PUBLIC_ID);
     }
 
     /**
-     * @param string $publicId
-     * @return $this
+     * {@inheritdoc}
      */
-    public function setPublicId($publicId)
+    public function setPublicId(string $publicId)
     {
         return $this->setData(self::PUBLIC_ID, $publicId);
     }
 
     /**
-     * @return string|null
+     * {@inheritdoc}
      */
-    public function getFirstName()
+    public function getStoreCode()
     {
-        return $this->_get(self::FIRST_NAME);
+        return (string)$this->_get(self::STORE_CODE);
     }
 
     /**
-     * @param string $firstName
-     * @return $this
+     * {@inheritdoc}
      */
-    public function setFirstName($firstName)
+    public function setStoreCode(string $storeCode)
+    {
+        return $this->setData(self::STORE_CODE, $storeCode);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFirstName()
+    {
+        return (string)$this->_get(self::FIRST_NAME);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setFirstName(string $firstName)
     {
         return $this->setData(self::FIRST_NAME, $firstName);
     }
 
     /**
-     * @return string|null
+     * {@inheritdoc}
      */
-    public function getLastName()
+    public function getMiddleInitial()
     {
-        return $this->_get(self::LAST_NAME);
+        return (string)$this->_get(self::MIDDLE_INITIAL);
     }
 
     /**
-     * @param string $lastName
-     * @return $this
+     * {@inheritdoc}
      */
-    public function setLastName($lastName)
+    public function setMiddleInitial(string $middleInitial)
+    {
+        return $this->setData(self::MIDDLE_INITIAL, $middleInitial);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLastName()
+    {
+        return (string)$this->_get(self::LAST_NAME);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLastName(string $lastName)
     {
         return $this->setData(self::LAST_NAME, $lastName);
     }
 
     /**
-     * @return string|null
+     * {@inheritdoc}
      */
-    public function getPhoneNumber()
+    public function getDateOfBirth()
     {
-        return $this->_get(self::PHONE_NUMBER);
+        return (string)$this->_get(self::DATE_OF_BIRTH);
     }
 
     /**
-     * @param string $phoneNumber
-     * @return $this
+     * {@inheritdoc}
      */
-    public function setPhoneNumber($phoneNumber)
+    public function setDateOfBirth(string $dateOfBirth)
     {
-        return $this->setData(self::PHONE_NUMBER, $phoneNumber);
+        return $this->setData(self::DATE_OF_BIRTH, $dateOfBirth);
     }
 
     /**
-     * @return string|null
+     * {@inheritdoc}
+     */
+    public function getMobilePHone()
+    {
+        return (string)$this->_get(self::MOBILE_PHONE);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setMobilePHone(string $mobilePhone)
+    {
+        return $this->setData(self::MOBILE_PHONE, $mobilePhone);
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function getEmail()
     {
-        return $this->_get(self::EMAIL);
+        return (string)$this->_get(self::EMAIL);
     }
 
     /**
-     * @param string $email
-     * @return $this
+     * {@inheritdoc}
      */
-    public function setEmail($email)
+    public function setEmail(string $email)
     {
         return $this->setData(self::EMAIL, $email);
     }
 
     /**
-     * @return float|null
+     * {@inheritdoc}
      */
     public function getNeededAmount()
     {
-        return $this->_get(self::NEEDED_AMOUNT);
+        return (string)$this->_get(self::NEEDED_AMOUNT);
     }
 
     /**
-     * @param float $neededAmount
-     * @return $this
+     * {@inheritdoc}
      */
-    public function setNeededAmount($neededAmount)
+    public function setNeededAmount(string $neededAmount)
     {
         return $this->setData(self::NEEDED_AMOUNT, $neededAmount);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRedirectUrl()
+    {
+        return (string)$this->_get(self::REDIRECT_URL);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setRedirectUrl(string $redirectUrl)
+    {
+        return $this->setData(self::REDIRECT_URL, $redirectUrl);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getReferenceNumber()
+    {
+        return (string)$this->_get(self::REFERENCE_NUMBER);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setReferenceNumber(string $referenceNumber)
+    {
+        return $this->setData(self::REFERENCE_NUMBER, $referenceNumber);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAddress()
+    {
+        return $this->_get(self::ADDRESS);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAddress(\ClassyLlama\Credova\Api\Data\Application\AddressInterface $address)
+    {
+        return $this->setData(self::ADDRESS, $address);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProducts()
+    {
+        return $this->_get(self::PRODUCTS) ?? [];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setProducts(array $products)
+    {
+        return $this->setData(self::PRODUCTS, $products);
     }
 }
