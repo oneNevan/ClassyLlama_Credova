@@ -18,7 +18,6 @@ $viewModel = $this->getData('viewModel');
                 CRDV.plugin.inject('credova-button');
                 CRDV.plugin.addEventListener(function (e) {
                     if (e.eventName === CRDV.EVENT_USER_WAS_APPROVED) {
-                        console.log( e.eventArgs.publicId)
                         localStorage.setItem('credovaPublicId', e.eventArgs.publicId)
                     }
                 });
